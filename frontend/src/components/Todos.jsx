@@ -17,6 +17,9 @@ function Todos({ todos,onTodoUpdate }) {
   }
 
   async function deleteTodo(todo) {
+    const confirmDelete = window.confirm('Are you sure you want to delete this todo?');
+    if (!confirmDelete) return;
+    
     const response = await fetch("http://localhost:3000/delete", {
       method: "PUT",
       headers: {
