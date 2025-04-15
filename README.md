@@ -24,7 +24,7 @@ MONGO_URL= "Your mongodb URI"
 Go to ```backend``` and ```frontend``` directory and start the server
 ```
 cd backend
-nodemon server
+node index.js
 ```
 ```
 cd frontend
