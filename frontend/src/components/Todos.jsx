@@ -16,8 +16,23 @@ function Todos({ todos,onTodoUpdate }) {
     console.log(data);
   }
 
+  async function deleteTodo(todo) {
+    const response = await fetch("http://localhost:3000/delete", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: todo._id,
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  }
+
   return (
-    <div className="bg-blue-400 p-2 m-4">
+    <div className="bg-blue-400 p-2 m-4 rounded-md">
       {todos.map(function (todo) {
         return (
           <div className="bg-stone-500 p-2 m-4 rounded-lg">
@@ -29,6 +44,8 @@ function Todos({ todos,onTodoUpdate }) {
             >
               {todo.completed == true ? "completed" : "mark as completed"}
             </button>
+
+            <button className="bg-red-600 p-1 rounded-xl font-bold ml-2"  onClick={() => {deleteTodo(todo); onTodoUpdate()}}>Delete todo</button>
           </div>
         );
       })}

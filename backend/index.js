@@ -1,5 +1,5 @@
 const express = require("express");
-const { createTode, updateTodo } = require("./types");
+const { createTode, updateTodo, deleteTodo } = require("./types");
 const { todo } = require("./db")
 const mongoose = require("mongoose");
 var cors = require('cors')
@@ -65,6 +65,29 @@ app.put("/completed", async (req,res)=>{
     res.json({
         msg: "todo mark as completed"
     })
+
+})
+
+app.put("/delete" , async (req,res)=>{
+    const deletePayload = req.body;
+    const parsedPayload= deleteTodo.safeParse(deletePayload)
+
+    if(!parsedPayload.success){
+        res.status(403).json({
+            mag: "You send wrong inputs"
+        })
+        return;
+    }
+    // const id = new mongoose.Types.ObjectId(req.body.id);
+    const id = req.body.id;
+    await todo.deleteOne({
+        _id: id
+    })
+
+    res.json({
+        msg: "todo is deleted"
+    })
+
 
 })
 
