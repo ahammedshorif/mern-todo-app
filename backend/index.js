@@ -3,10 +3,16 @@ const { createTode, updateTodo, deleteTodo } = require("./types");
 const { todo } = require("./db")
 const mongoose = require("mongoose");
 var cors = require('cors')
+const dotenv = require("dotenv")
 const app = express()
+
 
 app.use(express.json())
 app.use(cors())
+dotenv.config()
+const PORT = process.env.PORT || 3000
+
+
 
 app.post("/todo", async (req,res)=>{
     const createPayload = req.body;
@@ -91,7 +97,7 @@ app.put("/delete" , async (req,res)=>{
 
 })
 
-app.listen(3000,()=>{
-    console.log("app lintening on 3000");
+app.listen(PORT,()=>{
+    console.log("app lintening on ", PORT);
     
 })
