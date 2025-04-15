@@ -1,6 +1,6 @@
 import React from "react";
 
-function CreateTodo() {
+function CreateTodo({onTodoCteate}) {
   return (
     <div className="flex flex-col justify-center w-auto mx-4 bg-blue-400">
       <input
@@ -33,6 +33,7 @@ function CreateTodo() {
           });
           const data = await response.json();
           console.log(data);
+          onTodoCteate();
         }}
       >
         Add Todo

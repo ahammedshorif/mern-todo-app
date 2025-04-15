@@ -1,6 +1,6 @@
 import React from "react";
 
-function Todos({ todos }) {
+function Todos({ todos,onTodoUpdate }) {
   async function markTodoCompleted(todo) {
     const response = await fetch("http://localhost:3000/completed", {
       method: "PUT",
@@ -25,7 +25,7 @@ function Todos({ todos }) {
             <h2 className="text-lg py-2 text-white">Description: {todo.description}</h2>
             <button
               className="bg-orange-400 p-1 rounded-xl font-bold"
-              onClick={() => {markTodoCompleted(todo)}}
+              onClick={() => {markTodoCompleted(todo); onTodoUpdate()}}
             >
               {todo.completed == true ? "completed" : "mark as completed"}
             </button>
